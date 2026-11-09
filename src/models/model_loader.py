@@ -43,6 +43,12 @@ def load_base_model(
 
     quant_config = None
     if load_in_4bit:
+        try:
+            import bitsandbytes
+        except ImportError:
+            raise ImportError(
+                "4-bit QLoRA requires bitsandbytes >= 0.46.1. Please run: pip install -U 'bitsandbytes>=0.46.1'"
+            )
         quant_config = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_quant_type="nf4",
@@ -50,12 +56,25 @@ def load_base_model(
             bnb_4bit_use_double_quant=True
         )
 
+    model_kwargs = {
+        "device_map": device_map,
+        "quantization_config": quant_config,
+        "trust_remote_code": True,
+    }
+
+    # Avoid torch_dtype deprecation warning in transformers >= 4.49
+    try:
+        import inspect
+        if "dtype" in inspect.signature(AutoModelForCausalLM.from_pretrained).parameters:
+            model_kwargs["dtype"] = torch_dtype
+        else:
+            model_kwargs["torch_dtype"] = torch_dtype
+    except Exception:
+        model_kwargs["dtype"] = torch_dtype
+
     model = AutoModelForCausalLM.from_pretrained(
         model_name_or_path,
-        device_map=device_map,
-        torch_dtype=torch_dtype,
-        quantization_config=quant_config,
-        trust_remote_code=True
+        **model_kwargs
     )
     return model
 
