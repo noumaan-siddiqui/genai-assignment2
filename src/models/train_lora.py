@@ -136,28 +136,48 @@ def train(args):
 
     print(f"Train samples: {len(train_dataset)}, Val samples: {len(val_dataset)}")
 
-    training_args = TrainingArguments(
-        output_dir=args.output_dir,
-        num_train_epochs=args.epochs,
-        per_device_train_batch_size=args.batch_size,
-        per_device_eval_batch_size=args.batch_size,
-        gradient_accumulation_steps=args.grad_accum,
-        learning_rate=args.learning_rate,
-        lr_scheduler_type="cosine",
-        warmup_ratio=args.warmup_ratio,
-        logging_steps=10,
-        eval_strategy="epoch",
-        save_strategy="epoch",
-        save_total_limit=2,
-        load_best_model_at_end=True,
-        metric_for_best_model="eval_loss",
-        greater_is_better=False,
-        fp16=torch.cuda.is_available() and not torch.cuda.is_bf16_supported(),
-        bf16=torch.cuda.is_available() and torch.cuda.is_bf16_supported(),
-        gradient_checkpointing=args.gradient_checkpointing,
-        disable_tqdm=False,
-        report_to="none"
-    )
+    from dataclasses import fields
+    valid_fields = {f.name for f in fields(TrainingArguments)}
+
+    training_kwargs = {
+        "output_dir": args.output_dir,
+        "num_train_epochs": args.epochs,
+        "per_device_train_batch_size": args.batch_size,
+        "per_device_eval_batch_size": args.batch_size,
+        "gradient_accumulation_steps": args.grad_accum,
+        "learning_rate": args.learning_rate,
+        "lr_scheduler_type": "cosine",
+        "logging_steps": 10,
+        "save_total_limit": 2,
+        "load_best_model_at_end": True,
+        "metric_for_best_model": "eval_loss",
+        "greater_is_better": False,
+        "fp16": torch.cuda.is_available() and not torch.cuda.is_bf16_supported(),
+        "bf16": torch.cuda.is_available() and torch.cuda.is_bf16_supported(),
+        "gradient_checkpointing": args.gradient_checkpointing,
+        "disable_tqdm": False,
+        "report_to": "none"
+    }
+
+    # Handle evaluation strategy name (eval_strategy in 4.41+, evaluation_strategy in older)
+    if "eval_strategy" in valid_fields:
+        training_kwargs["eval_strategy"] = "epoch"
+    elif "evaluation_strategy" in valid_fields:
+        training_kwargs["evaluation_strategy"] = "epoch"
+
+    if "save_strategy" in valid_fields:
+        training_kwargs["save_strategy"] = "epoch"
+
+    # Handle warmup parameter (warmup_ratio in 4.x, unified into warmup_steps in 5.x)
+    if "warmup_ratio" in valid_fields:
+        training_kwargs["warmup_ratio"] = args.warmup_ratio
+    elif "warmup_steps" in valid_fields:
+        training_kwargs["warmup_steps"] = args.warmup_ratio
+
+    # Keep only fields valid for current transformers version
+    training_kwargs = {k: v for k, v in training_kwargs.items() if k in valid_fields}
+
+    training_args = TrainingArguments(**training_kwargs)
 
     data_collator = DataCollatorForSeq2Seq(
         tokenizer=tokenizer,
