@@ -1,0 +1,104 @@
+{
+  "dataset_name": "ncbi/TrialGPT-Criterion-Annotations",
+  "random_seed": 42,
+  "patient_split_protocol": "Sorted unique patient IDs, shuffled with np.random.default_rng(42); 37 train / 8 val / 8 test",
+  "patient_counts": {
+    "total_patients": 53,
+    "train_patients": 37,
+    "val_patients": 8,
+    "test_patients": 8
+  },
+  "annotation_counts": {
+    "total_annotations": 1015,
+    "train_annotations": 603,
+    "val_annotations": 206,
+    "test_annotations": 206
+  },
+  "patient_ids": {
+    "train": [
+      "sigir-20148",
+      "sigir-201416",
+      "sigir-201517",
+      "sigir-201519",
+      "sigir-20159",
+      "sigir-201425",
+      "sigir-201414",
+      "sigir-20157",
+      "sigir-201514",
+      "sigir-20144",
+      "sigir-20152",
+      "sigir-20151",
+      "sigir-201429",
+      "sigir-201426",
+      "sigir-20145",
+      "sigir-201518",
+      "sigir-20154",
+      "sigir-201521",
+      "sigir-201413",
+      "sigir-20146",
+      "sigir-201511",
+      "sigir-20147",
+      "sigir-20155",
+      "sigir-201418",
+      "sigir-20156",
+      "sigir-20143",
+      "sigir-20149",
+      "sigir-201523",
+      "sigir-201424",
+      "sigir-201524",
+      "sigir-201512",
+      "sigir-201423",
+      "sigir-201412",
+      "sigir-201510",
+      "sigir-201419",
+      "sigir-201520",
+      "sigir-20153"
+    ],
+    "val": [
+      "sigir-201415",
+      "sigir-20142",
+      "sigir-201430",
+      "sigir-201427",
+      "sigir-201515",
+      "sigir-20141",
+      "sigir-201420",
+      "sigir-201522"
+    ],
+    "test": [
+      "sigir-201422",
+      "sigir-20158",
+      "sigir-201411",
+      "sigir-201516",
+      "sigir-201513",
+      "sigir-201410",
+      "sigir-201421",
+      "sigir-201417"
+    ]
+  },
+  "label_distribution": {
+    "train": {
+      "not excluded": 292,
+      "not enough information": 174,
+      "included": 88,
+      "not applicable": 28,
+      "not included": 13,
+      "excluded": 8
+    },
+    "val": {
+      "not excluded": 101,
+      "not enough information": 53,
+      "included": 35,
+      "not applicable": 12,
+      "not included": 3,
+      "excluded": 2
+    },
+    "test": {
+      "not excluded": 91,
+      "not enough information": 66,
+      "included": 27,
+      "not applicable": 15,
+      "not included": 7
+    }
+  },
+  "leakage_checks_passed": true
+}
