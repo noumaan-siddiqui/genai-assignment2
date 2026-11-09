@@ -9,9 +9,16 @@ Evaluates:
 """
 
 import os
+import sys
 import json
 import argparse
 import numpy as np
+
+# Ensure project root is in sys.path
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from typing import List, Dict, Any, Tuple
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score
 from transformers import PreTrainedModel, PreTrainedTokenizer
