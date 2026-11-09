@@ -14,7 +14,7 @@ from transformers import (
 )
 from peft import LoraConfig, get_peft_model, PeftModel, TaskType
 
-DEFAULT_TARGET_MODEL = "Qwen/Qwen2.5-1.5B-Instruct"
+DEFAULT_TARGET_MODEL = "Qwen/Qwen2.5-3B-Instruct"
 DEFAULT_DRAFT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 
 
@@ -92,11 +92,12 @@ def setup_lora_model(
 def load_fine_tuned_model(
     adapter_path: str,
     base_model_name: str = DEFAULT_TARGET_MODEL,
-    device_map: str = "auto"
+    device_map: str = "auto",
+    load_in_4bit: bool = False
 ) -> Tuple[PeftModel, PreTrainedTokenizer]:
     """Load fine-tuned model by loading base model and applying LoRA adapter."""
     tokenizer = get_tokenizer(base_model_name)
-    base_model = load_base_model(base_model_name, device_map=device_map)
+    base_model = load_base_model(base_model_name, device_map=device_map, load_in_4bit=load_in_4bit)
     model = PeftModel.from_pretrained(base_model, adapter_path)
     model.eval()
     return model, tokenizer

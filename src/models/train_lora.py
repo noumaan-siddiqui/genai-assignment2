@@ -155,6 +155,7 @@ def train(args):
         fp16=torch.cuda.is_available() and not torch.cuda.is_bf16_supported(),
         bf16=torch.cuda.is_available() and torch.cuda.is_bf16_supported(),
         gradient_checkpointing=args.gradient_checkpointing,
+        disable_tqdm=False,
         report_to="none"
     )
 
