@@ -12,6 +12,7 @@ import sys
 import time
 import json
 import torch
+import numpy as np
 from typing import List, Dict, Any, Tuple, Optional
 from transformers import PreTrainedModel, PreTrainedTokenizer
 
@@ -285,7 +286,7 @@ def run_benchmark_suite(
         "benchmark_records": benchmark_records,
         "summary": {
             "all_tokens_equivalent": all(r["token_equivalence_verified"] for r in benchmark_records),
-            "mean_speedup_factor": float(np.mean([r["speedup_factor"] for r in benchmark_records]))
+            "mean_speedup_factor": float(sum(r["speedup_factor"] for r in benchmark_records) / max(1, len(benchmark_records)))
         }
     }
 
