@@ -27,29 +27,55 @@ if PROJECT_ROOT not in sys.path:
 def truncate_kv_cache(past_key_values, keep_len: int):
     """
     Safely trims Key/Value cache tensors to `keep_len` tokens.
-    Handles DynamicCache, tuple-of-tuples, and modern transformers cache formats.
+    Handles DynamicCache in modern transformers (negative tokens_to_remove),
+    legacy crop(keep_len), and tuple-of-tuples format.
     """
     if past_key_values is None:
         return None
 
-    # Transformers 4.36+ DynamicCache class
-    if hasattr(past_key_values, "crop"):
-        past_key_values.crop(keep_len)
+    # Modern transformers Cache object (e.g. DynamicCache)
+    if hasattr(past_key_values, "get_seq_length"):
+        cur_len = past_key_values.get_seq_length()
+        to_remove = cur_len - keep_len
+        if to_remove > 0 and hasattr(past_key_values, "crop"):
+            try:
+                # Modern API expects negative integer: number of tokens to remove from end
+                past_key_values.crop(-to_remove)
+            except ValueError:
+                # Older API expects final absolute keep_len
+                past_key_values.crop(keep_len)
         return past_key_values
-    elif hasattr(past_key_values, "key_cache") and hasattr(past_key_values, "value_cache"):
-        # Truncate in-place for DynamicCache lists
+
+    # In case past_key_values has layers directly
+    if hasattr(past_key_values, "layers"):
+        for layer in past_key_values.layers:
+            if hasattr(layer, "keys") and layer.keys is not None:
+                cur_len = layer.keys.shape[-2]
+                to_remove = cur_len - keep_len
+                if to_remove > 0 and hasattr(layer, "crop"):
+                    try:
+                        layer.crop(-to_remove)
+                    except ValueError:
+                        layer.crop(keep_len)
+        return past_key_values
+
+    # Older DynamicCache with key_cache and value_cache lists
+    if hasattr(past_key_values, "key_cache") and hasattr(past_key_values, "value_cache"):
         for i in range(len(past_key_values.key_cache)):
-            past_key_values.key_cache[i] = past_key_values.key_cache[i][:, :, :keep_len, :]
-            past_key_values.value_cache[i] = past_key_values.value_cache[i][:, :, :keep_len, :]
+            past_key_values.key_cache[i] = past_key_values.key_cache[i][..., :keep_len, :]
+            past_key_values.value_cache[i] = past_key_values.value_cache[i][..., :keep_len, :]
         return past_key_values
-    elif isinstance(past_key_values, (tuple, list)):
+
+    # Tuple of tuples format: past_key_values[layer_idx] = (k, v)
+    if isinstance(past_key_values, (tuple, list)):
         new_past = []
         for layer_kv in past_key_values:
             k, v = layer_kv[0], layer_kv[1]
-            new_k = k[:, :, :keep_len, :]
-            new_v = v[:, :, :keep_len, :]
+            new_k = k[..., :keep_len, :]
+            new_v = v[..., :keep_len, :]
             new_past.append((new_k, new_v))
         return tuple(new_past)
+
     return past_key_values
 
 
