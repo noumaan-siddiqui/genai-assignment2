@@ -1,0 +1,388 @@
+[
+  {
+    "annotation_id": 5,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Hypertension of > 170/100 mm of Hg",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [
+      3
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [3].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [3], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [3].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 8,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Unstable angina",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      0,
+      1,
+      2
+    ],
+    "pred_sentences": [
+      1
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 0.3333333333333333,
+    "evidence_f1": 0.5,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [1].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [1], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [1].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 13,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "IDDM (Type-1 diabetes mellitus)",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      4
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 14,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Systolic blood pressure < 100 mm Hg",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      3
+    ],
+    "pred_sentences": [
+      3
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [3].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [3], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [3].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 17,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "On calcium channel blockers",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 18,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients not eligible for Tc 99m SPECT",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 19,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients in whom beta blockers are contraindicated",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [],
+    "pred_sentences": [
+      4
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [4].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [4], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [4].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 20,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Geographical inaccessibility for treatment or follow-up evaluations",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      8
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 22,
+    "patient_id": "sigir-20141",
+    "criterion_type": "inclusion",
+    "criterion_text": "Clinical diagnosis of one or more risk factors, such as diabetes, smoking habit, lipid metabolism abnormality, history of ischemic heart disease (IHD) or cerebrovascular disease, obesity (BMI>25), chronic heart failure (NYHA II-III), and electrocardiogram (ECG) abnormality (LVH)",
+    "gold_eligibility": "included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      3,
+      4
+    ],
+    "pred_sentences": [
+      3,
+      4
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [3, 4].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [3, 4], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [3, 4].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 23,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients who have already been administered ARB",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 24,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients with IHD within 6 months after percutaneous coronary intervention(PCI), and who are stable but are going to implement PCI or coronary artery bypass grafting(CABG)",
+    "gold_eligibility": "not applicable",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "classification_mismatch"
+  },
+  {
+    "annotation_id": 26,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Pregnant women and women of childbearing potential",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not applicable",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not applicable' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"not applicable\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'not applicable' based on patient sentences [0].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 31,
+    "patient_id": "sigir-20142",
+    "criterion_type": "inclusion",
+    "criterion_text": "patients have fever more than one week",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [0].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 33,
+    "patient_id": "sigir-20142",
+    "criterion_type": "inclusion",
+    "criterion_text": "full of physical examination and laboratory examination have been carried out after one week\uff0cbut still cannot make a definite diagnosis",
+    "gold_eligibility": "not applicable",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [0, 1, 2, 3, 4, 5].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [0, 1, 2, 3, 4, 5], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [0, 1, 2, 3, 4, 5].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 41,
+    "patient_id": "sigir-20142",
+    "criterion_type": "exclusion",
+    "criterion_text": "Respiratory distress",
+    "gold_eligibility": "excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      4
+    ],
+    "pred_sentences": [
+      4
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [4].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [4], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [4].\"}",
+    "failure_type": "classification_mismatch"
+  },
+  {
+    "annotation_id": 42,
+    "patient_id": "sigir-20142",
+    "criterion_type": "exclusion",
+    "criterion_text": "Pregnant women",
+    "gold_eligibility": "not applicable",
+    "pred_eligibility": "not applicable",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not applicable' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not applicable\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not applicable' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 236,
+    "patient_id": "sigir-201415",
+    "criterion_type": "exclusion",
+    "criterion_text": "Malignancy",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      0,
+      1,
+      4,
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 238,
+    "patient_id": "sigir-201415",
+    "criterion_type": "exclusion",
+    "criterion_text": "Small submucous fibroids suitable for hysteroscopic resection",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      4
+    ],
+    "pred_sentences": [
+      5
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [5].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [5], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [5].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 239,
+    "patient_id": "sigir-201415",
+    "criterion_type": "exclusion",
+    "criterion_text": "Postmenopausal women",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [0].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 241,
+    "patient_id": "sigir-201415",
+    "criterion_type": "exclusion",
+    "criterion_text": "Uterus size exceeding the umbilical level",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      1
+    ],
+    "pred_sentences": [
+      4
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [4].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [4], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [4].\"}",
+    "failure_type": "missed_evidence"
+  }
+]

@@ -1,0 +1,372 @@
+[
+  {
+    "annotation_id": 161,
+    "patient_id": "sigir-201410",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients undergoing elective carotid endarterectomy",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 162,
+    "patient_id": "sigir-201410",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients undergoing open abdominal aortic aneurysm repair",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 163,
+    "patient_id": "sigir-201410",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients undergoing endovascular abdominal aneurysm repair",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [0].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 164,
+    "patient_id": "sigir-201410",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients undergoing surgical lower limb revascularisation (suprainguinal or infrainguinal)",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [0].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 174,
+    "patient_id": "sigir-201410",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients with previous axillary surgery",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 176,
+    "patient_id": "sigir-201410",
+    "criterion_type": "inclusion",
+    "criterion_text": "No medical history of central vena catheterization.",
+    "gold_eligibility": "included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 177,
+    "patient_id": "sigir-201410",
+    "criterion_type": "inclusion",
+    "criterion_text": "Maintenance hemodialysis after central vena catheterization.",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 179,
+    "patient_id": "sigir-201410",
+    "criterion_type": "exclusion",
+    "criterion_text": "Had been performed central venous puncture or catheterization before.",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 185,
+    "patient_id": "sigir-201411",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients were included if they were diagnosed with Shock, Acute respiratory distress syndrome (ARDS), or both.",
+    "gold_eligibility": "included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      2,
+      3
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 186,
+    "patient_id": "sigir-201411",
+    "criterion_type": "inclusion",
+    "criterion_text": "Heart rate of at least 90/min;",
+    "gold_eligibility": "included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      2
+    ],
+    "pred_sentences": [
+      2
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [2].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [2], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [2].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 187,
+    "patient_id": "sigir-201411",
+    "criterion_type": "inclusion",
+    "criterion_text": "A respiratory rate of at least 20/min or a PaCO2 of 32mmHg or lower or the use of mechanical ventilation;",
+    "gold_eligibility": "included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      2
+    ],
+    "pred_sentences": [
+      2
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [2].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [2], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [2].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 188,
+    "patient_id": "sigir-201411",
+    "criterion_type": "inclusion",
+    "criterion_text": "The use of vasopressors to maintain a systolic blood pressure of at least 90mmHg despite fluid resuscitation, low dose of dopamine (\u2264 5 \u03bcg/kg per minute), or dobutamine;",
+    "gold_eligibility": "not included",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      3
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 193,
+    "patient_id": "sigir-201411",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients were moribund.",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 196,
+    "patient_id": "sigir-201411",
+    "criterion_type": "exclusion",
+    "criterion_text": "Less than 18 years of age",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'not enough information' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"not enough information\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'not enough information' based on patient sentences [0].\"}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 197,
+    "patient_id": "sigir-201411",
+    "criterion_type": "exclusion",
+    "criterion_text": "Decreased level of consciousness",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      0,
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 306,
+    "patient_id": "sigir-201417",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients with liver space occupying lesion (LOE) that require extended hepatic resection.",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "included",
+    "gold_sentences": [
+      3
+    ],
+    "pred_sentences": [
+      3
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'included' based on patient sentences [3].",
+    "raw_output": "{\"eligibility\": \"included\", \"evidence_sentences\": [3], \"reasoning\": \"Criterion determined as 'included' based on patient sentences [3].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 319,
+    "patient_id": "sigir-201417",
+    "criterion_type": "exclusion",
+    "criterion_text": "Difficulty in monitoring.",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not excluded",
+    "gold_sentences": [
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not excluded' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not excluded\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not excluded' based on patient sentences [].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 322,
+    "patient_id": "sigir-201417",
+    "criterion_type": "exclusion",
+    "criterion_text": "Pregnant women or women of childbearing age who do not have adequate contraception.",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not applicable",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'not applicable' based on patient sentences [].",
+    "raw_output": "{\"eligibility\": \"not applicable\", \"evidence_sentences\": [], \"reasoning\": \"Criterion determined as 'not applicable' based on patient sentences [].\"}",
+    "failure_type": "classification_mismatch"
+  },
+  {
+    "annotation_id": 323,
+    "patient_id": "sigir-201417",
+    "criterion_type": "inclusion",
+    "criterion_text": "Immune Deficiency and early BMF in childhood",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "included",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "Criterion determined as 'included' based on patient sentences [0].",
+    "raw_output": "{\"eligibility\": \"included\", \"evidence_sentences\": [0], \"reasoning\": \"Criterion determined as 'included' based on patient sentences [0].\"}",
+    "failure_type": "hallucinated_information"
+  },
+  {
+    "annotation_id": 381,
+    "patient_id": "sigir-201421",
+    "criterion_type": "inclusion",
+    "criterion_text": "Age > 18 years at the time of signing the informed consent form",
+    "gold_eligibility": "included",
+    "pred_eligibility": "included",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      4
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "Criterion determined as 'included' based on patient sentences [4].",
+    "raw_output": "{\"eligibility\": \"included\", \"evidence_sentences\": [4], \"reasoning\": \"Criterion determined as 'included' based on patient sentences [4].\"}",
+    "failure_type": "evidence_retrieval_failure"
+  }
+]

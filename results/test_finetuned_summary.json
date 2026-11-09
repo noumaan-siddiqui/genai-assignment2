@@ -1,0 +1,176 @@
+{
+  "overall_classification": {
+    "accuracy": 0.7330097087378641,
+    "macro_f1": 0.5594507975080831,
+    "detailed_report": {
+      "included": {
+        "precision": 0.9090909090909091,
+        "recall": 0.7407407407407407,
+        "f1-score": 0.8163265306122449,
+        "support": 27.0
+      },
+      "not applicable": {
+        "precision": 0.75,
+        "recall": 0.4,
+        "f1-score": 0.5217391304347826,
+        "support": 15.0
+      },
+      "not enough information": {
+        "precision": 0.6507936507936508,
+        "recall": 0.6212121212121212,
+        "f1-score": 0.6356589147286822,
+        "support": 66.0
+      },
+      "not excluded": {
+        "precision": 0.7433628318584071,
+        "recall": 0.9230769230769231,
+        "f1-score": 0.8235294117647058,
+        "support": 91.0
+      },
+      "not included": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 7.0
+      },
+      "accuracy": 0.7330097087378641,
+      "macro avg": {
+        "precision": 0.6106494783485934,
+        "recall": 0.5370059570059571,
+        "f1-score": 0.5594507975080831,
+        "support": 206.0
+      },
+      "weighted avg": {
+        "precision": 0.7106497728007308,
+        "recall": 0.7330097087378641,
+        "f1-score": 0.7124347967268623,
+        "support": 206.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        7,
+        0,
+        0
+      ],
+      [
+        0,
+        6,
+        2,
+        7,
+        0
+      ],
+      [
+        2,
+        1,
+        41,
+        22,
+        0
+      ],
+      [
+        0,
+        1,
+        6,
+        84,
+        0
+      ],
+      [
+        0,
+        0,
+        7,
+        0,
+        0
+      ]
+    ]
+  },
+  "inclusion_classification": {
+    "accuracy": 0.76,
+    "macro_f1": 0.5290816326530612,
+    "detailed_report": {
+      "included": {
+        "precision": 0.9090909090909091,
+        "recall": 0.7407407407407407,
+        "f1-score": 0.8163265306122449,
+        "support": 27.0
+      },
+      "not applicable": {
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "f1-score": 0.5,
+        "support": 3.0
+      },
+      "not enough information": {
+        "precision": 0.6923076923076923,
+        "recall": 0.9473684210526315,
+        "f1-score": 0.8,
+        "support": 38.0
+      },
+      "not included": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 7.0
+      },
+      "accuracy": 0.76,
+      "macro avg": {
+        "precision": 0.6503496503496504,
+        "recall": 0.5053606237816763,
+        "f1-score": 0.5290816326530612,
+        "support": 75.0
+      },
+      "weighted avg": {
+        "precision": 0.718041958041958,
+        "recall": 0.76,
+        "f1-score": 0.7192108843537416,
+        "support": 75.0
+      }
+    }
+  },
+  "exclusion_classification": {
+    "accuracy": 0.7175572519083969,
+    "macro_f1": 0.5354184858828822,
+    "detailed_report": {
+      "not applicable": {
+        "precision": 0.7142857142857143,
+        "recall": 0.4166666666666667,
+        "f1-score": 0.5263157894736842,
+        "support": 12.0
+      },
+      "not enough information": {
+        "precision": 0.45454545454545453,
+        "recall": 0.17857142857142858,
+        "f1-score": 0.2564102564102564,
+        "support": 28.0
+      },
+      "not excluded": {
+        "precision": 0.7433628318584071,
+        "recall": 0.9230769230769231,
+        "f1-score": 0.8235294117647058,
+        "support": 91.0
+      },
+      "accuracy": 0.7175572519083969,
+      "macro avg": {
+        "precision": 0.6373980002298586,
+        "recall": 0.5061050061050061,
+        "f1-score": 0.5354184858828822,
+        "support": 131.0
+      },
+      "weighted avg": {
+        "precision": 0.678967320594018,
+        "recall": 0.7175572519083969,
+        "f1-score": 0.675087428425646,
+        "support": 131.0
+      }
+    }
+  },
+  "evidence_sentence_metrics": {
+    "mean_precision": 0.8563915857605179,
+    "mean_recall": 0.8550970873786408,
+    "mean_f1": 0.8535367545076282
+  },
+  "total_evaluated": 206,
+  "total_failures": 70,
+  "total_time_seconds": 1441.1911916732788
+}

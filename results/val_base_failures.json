@@ -1,0 +1,372 @@
+[
+  {
+    "annotation_id": 0,
+    "patient_id": "sigir-20141",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patients of chronic stable angina with abnormal Exercise Myocardial Perfusion Spect Scan with reversible and partially reversible ischemic changes.",
+    "gold_eligibility": "not enough information",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      0,
+      1,
+      2
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient record does not include information about an Exercise Myocardial Perfusion Scan (EMPS) or its results. Therefore, there is insufficient evidence to determine if the patient meets the inclusion criterion.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not include information about an Exercise Myocardial Perfusion Scan (EMPS) or its results. Therefore, there is insufficient evidence to determine if the patient meets the inclusion criterion.\"\n}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 1,
+    "patient_id": "sigir-20141",
+    "criterion_type": "inclusion",
+    "criterion_text": "Male and female",
+    "gold_eligibility": "included",
+    "pred_eligibility": "included",
+    "gold_sentences": [
+      0
+    ],
+    "pred_sentences": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "evidence_precision": 0.1111111111111111,
+    "evidence_recall": 1.0,
+    "evidence_f1": 0.19999999999999998,
+    "reasoning": "The patient is female, meeting the inclusion criterion of 'Male and female'.",
+    "raw_output": "{\n  \"eligibility\": \"included\",\n  \"evidence_sentences\": [\n    0,\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8\n  ],\n  \"reasoning\": \"The patient is female, meeting the inclusion criterion of 'Male and female'.\"\n}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 3,
+    "patient_id": "sigir-20141",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patient must understand and be willing, able and likely to comply with all study procedures and restrictions and comprehends the diary cards.",
+    "gold_eligibility": "included",
+    "pred_eligibility": "included",
+    "gold_sentences": [
+      8
+    ],
+    "pred_sentences": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "evidence_precision": 0.1111111111111111,
+    "evidence_recall": 1.0,
+    "evidence_f1": 0.19999999999999998,
+    "reasoning": "The patient understands the condition (episodic chest pain), is willing to participate, has no contraindications, and complies with the study procedures as evidenced by her physical examination being normal and her ability to provide informed consent.",
+    "raw_output": "{\n  \"eligibility\": \"included\",\n  \"evidence_sentences\": [\n    0,\n    1,\n    2,\n    3,\n    4,\n    5,\n    6,\n    7,\n    8\n  ],\n  \"reasoning\": \"The patient understands the condition (episodic chest pain), is willing to participate, has no contraindications, and complies with the study procedures as evidenced by her physical examination being normal and her ability to provide informed consent.\"\n}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 4,
+    "patient_id": "sigir-20141",
+    "criterion_type": "inclusion",
+    "criterion_text": "Patient must be able to give voluntary written informed consent.",
+    "gold_eligibility": "included",
+    "pred_eligibility": "included",
+    "gold_sentences": [
+      8
+    ],
+    "pred_sentences": [
+      0
+    ],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient presents with a clear understanding of the study and agrees to provide informed consent.",
+    "raw_output": "{\n  \"eligibility\": \"included\",\n  \"evidence_sentences\": [0],\n  \"reasoning\": \"The patient presents with a clear understanding of the study and agrees to provide informed consent.\"\n}",
+    "failure_type": "evidence_retrieval_failure"
+  },
+  {
+    "annotation_id": 5,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Hypertension of > 170/100 mm of Hg",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient's blood pressure is not mentioned in the provided records, hence there is insufficient information to determine if it exceeds 170/100 mm Hg.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [\n    \"The latest episode of pain ended half an hour prior to her arrival.\"\n  ],\n  \"reasoning\": \"The patient's blood pressure is not mentioned in the provided records, hence there is insufficient information to determine if it exceeds 170/100 mm Hg.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 6,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Valvular heart disease and cardiomyopathy",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient record does not provide any specific information regarding valvular heart disease or cardiomyopathy.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not provide any specific information regarding valvular heart disease or cardiomyopathy.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 7,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Myocardial infarction in < 6 months",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient's medical history does not include myocardial infarction (heart attack) within the last six months. However, there is insufficient information regarding the exact timing of the chest pain episodes and their nature to definitively rule out myocardial infarction.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient's medical history does not include myocardial infarction (heart attack) within the last six months. However, there is insufficient information regarding the exact timing of the chest pain episodes and their nature to definitively rule out myocardial infarction.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 9,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Congestive cardiac failure",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient's medical history does not explicitly mention congestive cardiac failure. The symptoms described (episodic chest pain, nausea, diaphoresis, and mild dyspnea) could be consistent with various conditions, including angina pectoris, but do not definitively rule out congestive cardiac failure.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient's medical history does not explicitly mention congestive cardiac failure. The symptoms described (episodic chest pain, nausea, diaphoresis, and mild dyspnea) could be consistent with various conditions, including angina pectoris, but do not definitively rule out congestive cardiac failure.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 10,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Severe anemia (Hb 7G/dl)",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient record does not provide any information regarding hemoglobin levels or anemia status.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not provide any information regarding hemoglobin levels or anemia status.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 11,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Cardiac arrhythmias or II or III degree AV block",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient's medical history and current symptoms do not provide sufficient information regarding cardiac arrhythmias or II or III degree AV block.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient's medical history and current symptoms do not provide sufficient information regarding cardiac arrhythmias or II or III degree AV block.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 12,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Significant liver or renal dysfunction",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient record does not provide any information regarding liver or renal function tests or symptoms suggestive of liver or renal dysfunction.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not provide any information regarding liver or renal function tests or symptoms suggestive of liver or renal dysfunction.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 13,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "IDDM (Type-1 diabetes mellitus)",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      4
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient record does not mention any information related to Type-1 diabetes mellitus (IDDM).",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not mention any information related to Type-1 diabetes mellitus (IDDM).\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 14,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Systolic blood pressure < 100 mm Hg",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      3
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient record does not provide systolic blood pressure measurements or any other blood pressure data.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not provide systolic blood pressure measurements or any other blood pressure data.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 16,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Known hypersensitivity to nicorandil",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient record does not mention any history of hypersensitivity to nicorandil.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not mention any history of hypersensitivity to nicorandil.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 17,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "On calcium channel blockers",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not included",
+    "gold_sentences": [
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient's medical history does not include documented use of calcium channel blockers, which is an exclusion criterion for this trial.",
+    "raw_output": "{\n  \"eligibility\": \"not included\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient's medical history does not include documented use of calcium channel blockers, which is an exclusion criterion for this trial.\"\n}",
+    "failure_type": "classification_mismatch"
+  },
+  {
+    "annotation_id": 20,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Geographical inaccessibility for treatment or follow-up evaluations",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      8
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient record does not provide any information regarding geographical location or accessibility to treatment or follow-up evaluations.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not provide any information regarding geographical location or accessibility to treatment or follow-up evaluations.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 22,
+    "patient_id": "sigir-20141",
+    "criterion_type": "inclusion",
+    "criterion_text": "Clinical diagnosis of one or more risk factors, such as diabetes, smoking habit, lipid metabolism abnormality, history of ischemic heart disease (IHD) or cerebrovascular disease, obesity (BMI>25), chronic heart failure (NYHA II-III), and electrocardiogram (ECG) abnormality (LVH)",
+    "gold_eligibility": "included",
+    "pred_eligibility": "not included",
+    "gold_sentences": [
+      3,
+      4
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient does not meet the inclusion criteria as she does not have any of the listed risk factors: diabetes, smoking habit, lipid metabolism abnormality, history of ischemic heart disease, obesity, chronic heart failure, or ECG abnormality.",
+    "raw_output": "{\n  \"eligibility\": \"not included\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient does not meet the inclusion criteria as she does not have any of the listed risk factors: diabetes, smoking habit, lipid metabolism abnormality, history of ischemic heart disease, obesity, chronic heart failure, or ECG abnormality.\"\n}",
+    "failure_type": "classification_mismatch"
+  },
+  {
+    "annotation_id": 23,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients who have already been administered ARB",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      5
+    ],
+    "pred_sentences": [],
+    "evidence_precision": 0.0,
+    "evidence_recall": 0.0,
+    "evidence_f1": 0.0,
+    "reasoning": "The patient record does not mention the administration of ARBs or any other specific medication that could indicate previous use of ARBs.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [],\n  \"reasoning\": \"The patient record does not mention the administration of ARBs or any other specific medication that could indicate previous use of ARBs.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 24,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Patients with IHD within 6 months after percutaneous coronary intervention(PCI), and who are stable but are going to implement PCI or coronary artery bypass grafting(CABG)",
+    "gold_eligibility": "not applicable",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [],
+    "pred_sentences": [],
+    "evidence_precision": 1.0,
+    "evidence_recall": 1.0,
+    "evidence_f1": 1.0,
+    "reasoning": "The patient's medical history does not include information about a recent IHD (invasive coronary procedure) such as PCI or CABG. There is also insufficient information regarding the stability of their condition.",
+    "raw_output": "{\n    \"eligibility\": \"not enough information\",\n    \"evidence_sentences\": [],\n    \"reasoning\": \"The patient's medical history does not include information about a recent IHD (invasive coronary procedure) such as PCI or CABG. There is also insufficient information regarding the stability of their condition.\"\n}",
+    "failure_type": "missed_evidence"
+  },
+  {
+    "annotation_id": 25,
+    "patient_id": "sigir-20141",
+    "criterion_type": "exclusion",
+    "criterion_text": "Severe/malignant/secondary hypertensive patients",
+    "gold_eligibility": "not excluded",
+    "pred_eligibility": "not enough information",
+    "gold_sentences": [
+      3
+    ],
+    "pred_sentences": [
+      0,
+      3
+    ],
+    "evidence_precision": 0.5,
+    "evidence_recall": 1.0,
+    "evidence_f1": 0.6666666666666666,
+    "reasoning": "The patient's hypertension is described as 'known' and 'mild', and there is no mention of severe, malignant, or secondary hypertension. The physical examination is normal, and the EKG shows nonspecific changes, which do not indicate severe or secondary hypertension.",
+    "raw_output": "{\n  \"eligibility\": \"not enough information\",\n  \"evidence_sentences\": [\n    0,\n    3\n  ],\n  \"reasoning\": \"The patient's hypertension is described as 'known' and 'mild', and there is no mention of severe, malignant, or secondary hypertension. The physical examination is normal, and the EKG shows nonspecific changes, which do not indicate severe or secondary hypertension.\"\n}",
+    "failure_type": "missed_evidence"
+  }
+]
