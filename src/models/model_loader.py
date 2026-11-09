@@ -45,16 +45,15 @@ def load_base_model(
     if load_in_4bit:
         try:
             import bitsandbytes
-        except ImportError:
-            raise ImportError(
-                "4-bit QLoRA requires bitsandbytes >= 0.46.1. Please run: pip install -U 'bitsandbytes>=0.46.1'"
+            quant_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch_dtype,
+                bnb_4bit_use_double_quant=True
             )
-        quant_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch_dtype,
-            bnb_4bit_use_double_quant=True
-        )
+        except ImportError:
+            print("[Warning] bitsandbytes not installed; falling back to native 16-bit precision (BF16/FP16).")
+            quant_config = None
 
     model_kwargs = {
         "device_map": device_map,
