@@ -184,10 +184,12 @@ def train(args):
 
     # Save training log history for plotting curves
     log_history = trainer.state.log_history
-    log_file = "logs/training_history.json"
-    with open(log_file, "w", encoding="utf-8") as f:
-        json.dump(log_history, f, indent=2)
-    print(f"Saved training history to {log_file}")
+    os.makedirs("results", exist_ok=True)
+    for target_path in ["results/training_history.json", "logs/training_history.json"]:
+        os.makedirs(os.path.dirname(target_path), exist_ok=True)
+        with open(target_path, "w", encoding="utf-8") as f:
+            json.dump(log_history, f, indent=2)
+    print("Saved training history to results/training_history.json and logs/training_history.json", flush=True)
 
     return train_result
 

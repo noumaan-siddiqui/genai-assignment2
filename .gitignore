@@ -56,8 +56,11 @@ hf_cache/
 # Experiment tracking & logs
 wandb/
 runs/
-logs/
 *.log
+logs/*.log
+!logs/*.json
+!logs/*.csv
+!results/
 
 # OS generated files
 .DS_Store
