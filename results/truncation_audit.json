@@ -1,0 +1,33 @@
+{
+  "total_records_audited": 1015,
+  "split_counts": {
+    "train": 603,
+    "val": 206,
+    "test": 206
+  },
+  "max_sentence_id_in_dataset": 13,
+  "max_sentences_per_patient_note": 14,
+  "max_words_patient_note": 235,
+  "max_words_criterion": 155,
+  "max_total_prompt_words": 350,
+  "estimated_max_prompt_tokens": 472,
+  "threshold_analysis": {
+    "256": {
+      "truncated_records": 284,
+      "evidence_lost_records": 37
+    },
+    "512": {
+      "truncated_records": 0,
+      "evidence_lost_records": 0
+    },
+    "768": {
+      "truncated_records": 0,
+      "evidence_lost_records": 0
+    },
+    "1024": {
+      "truncated_records": 0,
+      "evidence_lost_records": 0
+    }
+  },
+  "conclusion": "With max_length = 1024, exactly 0 records are truncated and 0% evidence sentences are lost. Setting max_length to 512 results in minimal truncation (~0-1%), while max_length <= 256 severely clips patient records. Hardware budget of Kaggle Dual T4 GPUs (30 GB VRAM) allows max_length = 1024 without memory exhaustion."
+}

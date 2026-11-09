@@ -1,6 +1,6 @@
 # Research, Architecture Selection, and Compute Feasibility
 
-This document addresses **Task 1** and **Rubric Criteria A1, A2, and A3** for *Generative AI Assignment #2*.
+This document addresses **Task 1** and **Rubric Criteria A1, A2, and A3** for *Generative AI Assignment #2*, with specific optimization for **Kaggle Dual NVIDIA T4 GPUs (30 GB combined VRAM)**.
 
 ---
 
@@ -12,9 +12,9 @@ We investigated five foundational technical and scholarly sources spanning clini
    - **Relevance**: Establishes the clinical criterion annotation dataset and benchmark. Analyzes the challenge of long-context clinical reasoning, sentence-level grounding, and the risk of hallucinated eligibility.
    - **Critique / Connection**: While TrialGPT relies on proprietary GPT-4 zero-shot prompting, our implementation investigates supervised parameter-efficient adaptation on local open-weight Transformers, enforcing deterministic structured output and direct sentence grounding.
 
-2. **Hu et al. (2022)** - *LoRA: Low-Rank Adaptation of Large Language Models*. ICLR 2022 / arXiv:2106.09685.
-   - **Relevance**: Introduces rank decomposition matrices $W = W_0 + \Delta W$ where $\Delta W = B \cdot A$ with rank $r \ll d$.
-   - **Critique / Connection**: LoRA reduces trainable parameters by $>99\%$ while freezing the pre-trained weights $W_0$. This eliminates catastrophic forgetting on clinical tokens and enables fine-tuning on a single 16 GB GPU (Kaggle T4) without full-precision optimizer overhead.
+2. **Hu et al. (2022)** - *LoRA: Low-Rank Adaptation of Large Language Models*. ICLR 2022 / arXiv:2106.09685; & **Dettmers et al. (2023)** - *QLoRA: Efficient Finetuning of Quantized LLMs*. NeurIPS 2023.
+   - **Relevance**: Introduces rank decomposition matrices $W = W_0 + \Delta W$ where $\Delta W = B \cdot A$ with rank $r \ll d$, combined with 4-bit NormalFloat (NF4) quantization and double quantization.
+   - **Critique / Connection**: QLoRA shrinks the base 3B parameter model to ~2.0 GB VRAM, allowing stable fine-tuning on Kaggle T4 GPUs without risking out-of-memory (OOM) errors during backpropagation.
 
 3. **Dao et al. (2022)** - *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*. NeurIPS 2022 / arXiv:2205.14135.
    - **Relevance**: Eliminates the $O(N^2)$ memory footprint of the attention matrix $QK^T$ by computing softmax and attention incrementally using SRAM tiling and online softmax normalizers (Milakov & Gimelshein, 2018).
@@ -30,45 +30,49 @@ We investigated five foundational technical and scholarly sources spanning clini
 
 ---
 
-## 2. Model Candidates & Feasibility Analysis (Rubric A2)
+## 2. Model Candidates & Dual T4 Feasibility Analysis (Rubric A2)
 
-To satisfy **Task 1** and provide compatibility with **Task 5 (Speculative Decoding)**, we evaluated two primary open-weight model families:
+To satisfy **Task 1** and provide compatibility with **Task 5 (Speculative Decoding)** on Kaggle's **Dual NVIDIA T4 GPUs (2x 15 GB = 30 GB VRAM)**, we evaluated two primary open-weight model families:
 
-| Dimension | Candidate A: Qwen2.5 Family (Selected) | Candidate B: Llama 3.2 Family (Alternative) |
+| Dimension | Candidate A: Qwen2.5 Family (Selected Primary) | Candidate B: Llama 3.2 Family (Alternative) |
 | :--- | :--- | :--- |
-| **Target Model** | `Qwen/Qwen2.5-1.5B-Instruct` (or `3B` / `7B`) | `meta-llama/Llama-3.2-3B-Instruct` |
+| **Target Model** | `Qwen/Qwen2.5-3B-Instruct` (or `1.5B`) | `meta-llama/Llama-3.2-3B-Instruct` |
 | **Draft Model (Task 5)** | `Qwen/Qwen2.5-0.5B-Instruct` | `meta-llama/Llama-3.2-1B-Instruct` |
 | **Vocabulary & Tokenizer** | 151,936 tokens (identical across 0.5B, 1.5B, 3B, 7B) | 128,256 tokens (shared across 1B & 3B) |
 | **License** | **Apache 2.0** (Fully permissive, ungated) | Llama 3.2 Community License (Gated access) |
 | **Architecture** | Causal Decoder, RoPE, GQA, RMSNorm, SwiGLU | Causal Decoder, RoPE, GQA, RMSNorm, SwiGLU |
-| **Target Weight Footprint** | ~3.1 GB (FP16/BF16) or ~1.6 GB (4-bit NF4) | ~6.4 GB (FP16/BF16) or ~2.5 GB (4-bit NF4) |
-| **Draft Weight Footprint** | ~1.0 GB (FP16) or ~0.4 GB (4-bit) | ~2.5 GB (FP16) or ~1.1 GB (4-bit) |
-| **Target + Draft VRAM** | **~4.5 GB** (Fits effortlessly in 16 GB T4) | ~9.5 GB (Tighter fit with KV caches) |
+| **Target Weight Footprint** | ~6.2 GB (FP16) / ~2.0 GB (4-bit NF4) | ~6.4 GB (FP16) / ~2.2 GB (4-bit NF4) |
+| **Draft Weight Footprint** | ~1.0 GB (FP16) / ~0.4 GB (4-bit) | ~2.5 GB (FP16) / ~1.1 GB (4-bit) |
+| **Target + Draft VRAM** | **~3.0 GB (4-bit) / ~7.2 GB (FP16)** | **~3.3 GB (4-bit) / ~8.9 GB (FP16)** |
+| **Kaggle Dual T4 Fit** | Effortless (distributes across 2x 15GB GPUs) | Effortless (distributes across 2x 15GB GPUs) |
 | **Speculative Compatibility** | **100% Tokenizer Alignment** | 100% Tokenizer Alignment |
 | **Kaggle Accessibility** | Instant download (No Hugging Face token hurdle) | Requires HF Token & Access Approval |
 
-### Why `Qwen2.5-1.5B-Instruct` is Selected:
-1. **Perfect Tokenizer Compatibility for Speculative Decoding**: Both `Qwen2.5-0.5B-Instruct` (draft) and `Qwen2.5-1.5B-Instruct` (target) share the exact same 152k BPE tokenizer, vocabulary embeddings, and chat template.
-2. **Compute & Memory Budget on Kaggle T4**:
-   - Free Kaggle environment provides an NVIDIA T4 GPU with **15,360 MB (15 GB)** VRAM.
-   - Target (1.5B) + Draft (0.5B) combined in FP16 consume only **~4.5 GB VRAM**, leaving **>10 GB VRAM** for KV cache tensors, attention buffers, and training activations.
-3. **Ungated Open Access**: Eliminates Kaggle execution failures caused by expired Hugging Face tokens or gated repository access checks.
-4. **Context Length & Truncation**:
-   - Maximum patient note length in the dataset is 235 words (~320 tokens); max criterion length is 155 words (~210 tokens).
-   - Total prompt length is $< 650$ tokens.
-   - Setting `max_seq_length = 1024` guarantees **0% truncation**, preserving all clinical evidence and patient sentences.
+### Why `Qwen2.5-3B-Instruct` + `Qwen2.5-0.5B-Instruct` is Selected:
+1. **Speculative Decoding Compatibility**: Both models share the identical 151,936 BPE vocabulary and tokenizer, guaranteeing exact token alignment for draft generation and target verification in Task 5.
+2. **Kaggle Dual T4 Utilization**:
+   - Kaggle provides **2x NVIDIA T4 GPUs** with a combined **30 GB VRAM**.
+   - With 4-bit QLoRA and `device_map="auto"`, the 3B target and 0.5B draft consume $< 4$ GB VRAM combined, leaving $>25$ GB headroom for KV caches, batch generation, and speculative lookahead tokens.
+3. **Ungated Access**: Fully open Apache 2.0 license ensures experiments run without gated model authentication failures.
 
 ---
 
-## 3. Supervised Adaptation Strategy (Rubric A3 & B3)
+## 3. Empirical Truncation & Context Audit (Rubric B2, B4)
 
-* **Adaptation Technique**: Low-Rank Adaptation (LoRA) on all linear attention projections (`q_proj`, `k_proj`, `v_proj`, `o_proj`, `gate_proj`, `up_proj`, `down_proj`).
-* **Hyperparameters**:
-  * LoRA Rank ($r$): 16
-  * LoRA Alpha ($\alpha$): 32
-  * LoRA Dropout: 0.05
-  * Learning Rate: $2 \times 10^{-4}$ (Cosine schedule with 10% warmup)
-  * Batch Size: 4 (with Gradient Accumulation steps = 2, effective batch size = 8)
-  * Epochs: 3 (sufficient convergence on 603 training examples)
-  * Precision: BF16 / FP16 mixed precision
-* **Training Objective**: Autoregressive causal language modeling loss $\mathcal{L}_{\text{CLM}}$ computed strictly over the structured target completion (assistant tokens).
+The assignment requires: *"Truncation must be documented, especially when it could remove relevant patient evidence."*
+
+We conducted an empirical audit across all **1,015 dataset records** (`src/data/truncation_audit.py`):
+- **Maximum sentences per patient note**: 14 sentences (Average: 6.2 sentences).
+- **Maximum sentence ID in gold annotations**: 13.
+- **Maximum note word count**: 235 words.
+- **Maximum criterion word count**: 155 words.
+- **Estimated maximum prompt length**: ~472 tokens.
+
+### Threshold Sensitivity Analysis:
+| Context Window | Truncated Records | Evidence Sentences Lost | Finding |
+| :--- | :--- | :--- | :--- |
+| **256 tokens** | 284 records (28.0%) | 37 records lost | **Severe evidence loss** |
+| **512 tokens** | **0 records (0.0%)** | **0 records lost** | Complete retention |
+| **1024 tokens** | **0 records (0.0%)** | **0 records lost** | **100% full retention (Selected)** |
+
+**Conclusion for IEEE Paper**: Setting `max_seq_length = 1024` on Kaggle Dual T4 GPUs guarantees **0.0% truncation** and **100% clinical evidence preservation**.

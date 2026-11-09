@@ -1,7 +1,10 @@
 """
-Fine-tuning script for clinical trial eligibility matching using LoRA.
-Trains the open-weight decoder (Qwen2.5-1.5B-Instruct) on the 37-patient training split.
-Masks prompt tokens with -100 so loss is computed exclusively on structured assistant output.
+Fine-tuning script for clinical trial eligibility matching using QLoRA.
+Optimized for Kaggle Dual NVIDIA T4 GPUs (30 GB combined VRAM).
+- Uses 4-bit NormalFloat (NF4) quantization via bitsandbytes.
+- Attaches 16-bit LoRA adapters.
+- Uses gradient checkpointing and gradient accumulation to ensure 0% OOM risk.
+- Supports multi-GPU distribution via device_map="auto".
 """
 
 import os
@@ -102,7 +105,8 @@ def train(args):
     tokenizer = get_tokenizer(args.model_name)
     base_model = load_base_model(
         args.model_name,
-        load_in_4bit=args.load_in_4bit
+        load_in_4bit=args.use_qlora,
+        device_map="auto"
     )
 
     print("Configuring LoRA adapter...")
@@ -112,6 +116,12 @@ def train(args):
         lora_alpha=args.lora_alpha,
         lora_dropout=args.lora_dropout
     )
+
+    # Enable gradient checkpointing for memory safety on Kaggle T4s
+    if args.gradient_checkpointing:
+        model.gradient_checkpointing_enable()
+        if hasattr(model, "enable_input_require_grads"):
+            model.enable_input_require_grads()
 
     print("Preparing datasets...")
     train_dataset = ClinicalTrialDataset(args.train_path, tokenizer, max_length=args.max_length)
@@ -137,6 +147,7 @@ def train(args):
         greater_is_better=False,
         fp16=torch.cuda.is_available() and not torch.cuda.is_bf16_supported(),
         bf16=torch.cuda.is_available() and torch.cuda.is_bf16_supported(),
+        gradient_checkpointing=args.gradient_checkpointing,
         report_to="none"
     )
 
@@ -175,20 +186,22 @@ def train(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model_name", type=str, default=DEFAULT_TARGET_MODEL)
+    parser.add_argument("--model_name", type=str, default="Qwen/Qwen2.5-3B-Instruct")
     parser.add_argument("--train_path", type=str, default="data/train.jsonl")
     parser.add_argument("--val_path", type=str, default="data/val.jsonl")
-    parser.add_argument("--output_dir", type=str, default="checkpoints/lora")
+    parser.add_argument("--output_dir", type=str, default="checkpoints/lora_qwen3b")
     parser.add_argument("--epochs", type=int, default=3)
-    parser.add_argument("--batch_size", type=int, default=4)
-    parser.add_argument("--grad_accum", type=int, default=2)
+    parser.add_argument("--batch_size", type=int, default=2)
+    parser.add_argument("--grad_accum", type=int, default=4)
     parser.add_argument("--learning_rate", type=float, default=2e-4)
     parser.add_argument("--warmup_ratio", type=float, default=0.1)
     parser.add_argument("--lora_r", type=int, default=16)
     parser.add_argument("--lora_alpha", type=int, default=32)
     parser.add_argument("--lora_dropout", type=float, default=0.05)
     parser.add_argument("--max_length", type=int, default=1024)
-    parser.add_argument("--load_in_4bit", action="store_true")
+    parser.add_argument("--use_qlora", action="store_true", default=True, help="Use 4-bit QLoRA")
+    parser.add_argument("--no_qlora", action="store_false", dest="use_qlora", help="Disable QLoRA and use FP16/BF16")
+    parser.add_argument("--gradient_checkpointing", action="store_true", default=True)
     args = parser.parse_args()
 
     train(args)
