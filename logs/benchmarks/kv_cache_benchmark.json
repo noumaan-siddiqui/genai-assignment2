@@ -1,0 +1,72 @@
+{
+  "task": "Task 3: KV-Cached Autoregressive Generation",
+  "benchmark_records": [
+    {
+      "config_id": 1,
+      "prompt_length_tokens": 33,
+      "generated_tokens": 25,
+      "token_equivalence_verified": true,
+      "uncached": {
+        "prefill_sec": 0.11538740600008168,
+        "decode_sec": 5.499859772999116,
+        "total_sec": 5.615247178999198,
+        "tokens_per_sec": 4.452163753178556,
+        "peak_vram_mb": 4616.9951171875
+      },
+      "kv_cached": {
+        "prefill_sec": 0.12339550300021074,
+        "decode_sec": 2.0138528399997995,
+        "total_sec": 2.13724834300001,
+        "tokens_per_sec": 11.697283549152363,
+        "peak_vram_mb": 4600.0390625
+      },
+      "speedup_factor": 2.627325538053261
+    },
+    {
+      "config_id": 2,
+      "prompt_length_tokens": 62,
+      "generated_tokens": 50,
+      "token_equivalence_verified": true,
+      "uncached": {
+        "prefill_sec": 0.14228477599999678,
+        "decode_sec": 16.464333406999685,
+        "total_sec": 16.606618182999682,
+        "tokens_per_sec": 3.0108478089221613,
+        "peak_vram_mb": 4636.01611328125
+      },
+      "kv_cached": {
+        "prefill_sec": 0.11985149600013756,
+        "decode_sec": 4.175319656001193,
+        "total_sec": 4.2951711520013305,
+        "tokens_per_sec": 11.640979629017288,
+        "peak_vram_mb": 4603.30078125
+      },
+      "speedup_factor": 3.8663460795033475
+    },
+    {
+      "config_id": 3,
+      "prompt_length_tokens": 127,
+      "generated_tokens": 75,
+      "token_equivalence_verified": false,
+      "uncached": {
+        "prefill_sec": 0.14708357400013483,
+        "decode_sec": 38.842994534997615,
+        "total_sec": 38.99007810899775,
+        "tokens_per_sec": 1.9235662922013117,
+        "peak_vram_mb": 4667.09228515625
+      },
+      "kv_cached": {
+        "prefill_sec": 0.1661751279998498,
+        "decode_sec": 6.172293043999616,
+        "total_sec": 6.338468171999466,
+        "tokens_per_sec": 11.832511869822355,
+        "peak_vram_mb": 4607.7080078125
+      },
+      "speedup_factor": 6.151340827066888
+    }
+  ],
+  "summary": {
+    "all_tokens_equivalent": false,
+    "mean_speedup_factor": 4.215004148207832
+  }
+}

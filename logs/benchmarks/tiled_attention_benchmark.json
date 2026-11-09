@@ -1,0 +1,81 @@
+{
+  "task": "Task 4: Efficient Tiled Attention with Online Softmax",
+  "benchmark_records": [
+    {
+      "seq_len": 128,
+      "reference": {
+        "time_ms": 0.34,
+        "peak_mem_mb": 10.69
+      },
+      "tiled_online_softmax": {
+        "time_ms": 11.7,
+        "peak_mem_mb": 9.23
+      },
+      "fused_backend": {
+        "time_ms": 0.11,
+        "peak_mem_mb": 9.12
+      }
+    },
+    {
+      "seq_len": 256,
+      "reference": {
+        "time_ms": 0.34,
+        "peak_mem_mb": 16.38
+      },
+      "tiled_online_softmax": {
+        "time_ms": 35.8,
+        "peak_mem_mb": 10.23
+      },
+      "fused_backend": {
+        "time_ms": 0.19,
+        "peak_mem_mb": 10.12
+      }
+    },
+    {
+      "seq_len": 512,
+      "reference": {
+        "time_ms": 0.98,
+        "peak_mem_mb": 37.14
+      },
+      "tiled_online_softmax": {
+        "time_ms": 123.65,
+        "peak_mem_mb": 12.23
+      },
+      "fused_backend": {
+        "time_ms": 0.46,
+        "peak_mem_mb": 12.12
+      }
+    },
+    {
+      "seq_len": 1024,
+      "reference": {
+        "time_ms": 3.16,
+        "peak_mem_mb": 116.16
+      },
+      "tiled_online_softmax": {
+        "time_ms": 453.94,
+        "peak_mem_mb": 16.23
+      },
+      "fused_backend": {
+        "time_ms": 1.13,
+        "peak_mem_mb": 16.12
+      }
+    },
+    {
+      "seq_len": 2048,
+      "reference": {
+        "time_ms": 11.48,
+        "peak_mem_mb": 424.19
+      },
+      "tiled_online_softmax": {
+        "time_ms": 1745.84,
+        "peak_mem_mb": 24.23
+      },
+      "fused_backend": {
+        "time_ms": 3.6,
+        "peak_mem_mb": 24.12
+      }
+    }
+  ],
+  "discussion": "The pure PyTorch educational tiled implementation achieves exact mathematical equivalence with reference SDPA (MAE < 1e-5) while proving the memory scaling advantage of avoiding the O(N^2) attention matrix. As expected in educational Python implementations, runtime is dominated by Python loop overhead and lack of low-level GPU SRAM register tiling, whereas fused CUDA kernels (e.g. FlashAttention-2 / PyTorch F.scaled_dot_product_attention) fuse tiling directly into GPU shared memory."
+}

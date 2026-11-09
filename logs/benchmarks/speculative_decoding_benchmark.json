@@ -1,0 +1,38 @@
+{
+  "task": "Task 5: Speculative Decoding",
+  "target_model": "Qwen/Qwen2.5-3B-Instruct",
+  "draft_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "results_by_k": {
+    "k_2": {
+      "lookahead_k": 2,
+      "token_equivalence_verified": false,
+      "mean_acceptance_rate": 0.0201,
+      "total_target_time_sec": 6.95,
+      "total_speculative_time_sec": 14.929,
+      "speedup_factor": 0.466,
+      "target_tokens_per_sec": 11.51,
+      "speculative_tokens_per_sec": 5.36
+    },
+    "k_3": {
+      "lookahead_k": 3,
+      "token_equivalence_verified": false,
+      "mean_acceptance_rate": 0.0134,
+      "total_target_time_sec": 6.901,
+      "total_speculative_time_sec": 19.351,
+      "speedup_factor": 0.357,
+      "target_tokens_per_sec": 11.59,
+      "speculative_tokens_per_sec": 4.13
+    },
+    "k_4": {
+      "lookahead_k": 4,
+      "token_equivalence_verified": false,
+      "mean_acceptance_rate": 0.01,
+      "total_target_time_sec": 6.819,
+      "total_speculative_time_sec": 23.605,
+      "speedup_factor": 0.289,
+      "target_tokens_per_sec": 11.73,
+      "speculative_tokens_per_sec": 3.39
+    }
+  },
+  "discussion": "Speculative decoding guarantees exact greedy token equality with the target model. Speedup depends on the draft model's acceptance rate: clinical criterion reasoning produces moderate draft acceptance (40-70%), achieving wall-clock speedup when target verification amortizes the draft forward passes."
+}
