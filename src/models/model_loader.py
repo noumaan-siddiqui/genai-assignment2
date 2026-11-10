@@ -39,24 +39,37 @@ def load_base_model(
 ) -> PreTrainedModel:
     """Load pre-trained causal language model."""
     if torch_dtype is None:
-        torch_dtype = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else torch.float16
+        if torch.cuda.is_available():
+            torch_dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
+        else:
+            # On CPU, float32 or bfloat16 avoids "Half not implemented" runtime errors
+            torch_dtype = torch.float32
 
     quant_config = None
     if load_in_4bit:
-        try:
-            import bitsandbytes
-            quant_config = BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_quant_type="nf4",
-                bnb_4bit_compute_dtype=torch_dtype,
-                bnb_4bit_use_double_quant=True
-            )
-        except ImportError:
-            print("[Warning] bitsandbytes not installed; falling back to native 16-bit precision (BF16/FP16).")
+        if not torch.cuda.is_available():
+            print("[Warning] 4-bit quantization (bitsandbytes) requires a CUDA GPU. Falling back to native precision on CPU.")
             quant_config = None
+        else:
+            try:
+                import bitsandbytes
+                quant_config = BitsAndBytesConfig(
+                    load_in_4bit=True,
+                    bnb_4bit_quant_type="nf4",
+                    bnb_4bit_compute_dtype=torch_dtype,
+                    bnb_4bit_use_double_quant=True
+                )
+            except ImportError:
+                print("[Warning] bitsandbytes not installed; falling back to native precision.")
+                quant_config = None
+
+    # Handle device map cleanly for CPU-only environments
+    effective_device_map = device_map
+    if not torch.cuda.is_available() and device_map == "auto":
+        effective_device_map = None
 
     model_kwargs = {
-        "device_map": device_map,
+        "device_map": effective_device_map,
         "quantization_config": quant_config,
         "trust_remote_code": True,
     }
