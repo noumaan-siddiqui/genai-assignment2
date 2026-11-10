@@ -8,6 +8,14 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+}
+
 \begin{document}
 
 \title{Supervised Transformer Adaptation and Advanced Inference Mechanisms for Clinical Trial Eligibility Matching}
@@ -104,6 +112,7 @@ Table \ref{tab:clinical_results} summarizes classification accuracy, macro-F1, a
 \begin{table}[htbp]
 \caption{Model Performance Across Splits Before and After QLoRA Adaptation}
 \begin{center}
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Configuration} & \textbf{Accuracy} & \textbf{Macro-F1} & \textbf{Inc F1 / Exc F1} & \textbf{Evidence F1} \\
@@ -113,11 +122,19 @@ Base (Zero-Shot Val) & 37.9\% & 0.245 & 0.281 / 0.210 & 54.5\% \\
 \textbf{Fine-Tuned (Held-Out Test)} & \textbf{73.3\%} & \textbf{0.559} & \textbf{0.542 / 0.576} & \textbf{85.4\%} \\
 \bottomrule
 \end{tabular}
+}
 \label{tab:clinical_results}
 \end{center}
 \end{table}
 
-The zero-shot base model frequently collapsed multi-class categories into generic affirmative labels. Supervised adaptation increased validation accuracy by $+39.8\%$ absolute and elevated held-out evidence sentence retrieval F1 to 85.4\%.
+The zero-shot base model frequently collapsed multi-class categories into generic affirmative labels. Supervised adaptation increased validation accuracy by $+39.8\%$ absolute and elevated held-out evidence sentence retrieval F1 to 85.4\%. As depicted in Fig. \ref{fig:training_loss}, the QLoRA optimization converged stably across 228 steps, reducing cross-entropy loss from 1.937 to 0.022.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\columnwidth]{figures/training_loss.pdf}
+\caption{QLoRA fine-tuning loss convergence curve over 228 optimization steps on dual NVIDIA T4 GPUs.}
+\label{fig:training_loss}
+\end{figure}
 
 \subsection{KV-Cache Benchmarking and Token Equivalence}
 Table \ref{tab:kv_cache} reports prefill latency, decode latency, generation throughput, and peak VRAM across three sequence configurations on an NVIDIA T4 GPU.
@@ -125,9 +142,10 @@ Table \ref{tab:kv_cache} reports prefill latency, decode latency, generation thr
 \begin{table}[htbp]
 \caption{Task 3: KV-Cache vs. Uncached Greedy Decoding on NVIDIA T4}
 \begin{center}
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccccc}
 \toprule
-\textbf{Config} & \textbf{Prompt / Gen} & \textbf{Match} & \textbf{Uncached t/s} & \textbf{Cached t/s} & \textbf{Speedup} & \textbf{VRAM} \\
+\textbf{Config} & \textbf{Prompt / Gen} & \textbf{Match} & \textbf{Uncached} & \textbf{Cached} & \textbf{Speedup} & \textbf{VRAM} \\
 \midrule
 Config 1 & 33 / 25 tok & True & 4.5 t/s & 11.7 t/s & 2.63$\times$ & 4,600 MB \\
 Config 2 & 62 / 50 tok & True & 3.0 t/s & 11.6 t/s & 3.87$\times$ & 4,603 MB \\
@@ -135,11 +153,19 @@ Config 3 & 127 / 75 tok & Mismatch$^*$ & 1.9 t/s & 11.8 t/s & 6.15$\times$ & 4,6
 \bottomrule
 \multicolumn{7}{l}{$^*$Minor token divergence after step 60 due to floating-point non-associativity.}
 \end{tabular}
+}
 \label{tab:kv_cache}
 \end{center}
 \end{table}
 
-While uncached generation throughput decayed from 4.5 t/s to 1.9 t/s as sequence length grew, the KV-cached path sustained an invariant throughput of 11.7 t/s, demonstrating a peak speedup of 6.15$\times$. In Config 3, we observed greedy token divergence at generation step 64; investigation revealed that floating-point non-associativity between cumulative 16-bit GEMM operations flipped the argmax between two candidate tokens separated by a logit margin of $< 10^{-4}$.
+While uncached generation throughput decayed from 4.5 t/s to 1.9 t/s as sequence length grew, the KV-cached path sustained an invariant throughput of 11.7 t/s, demonstrating a peak speedup of 6.15$\times$. In Config 3, we observed greedy token divergence at generation step 64; investigation revealed that floating-point non-associativity between cumulative 16-bit GEMM operations flipped the argmax between two candidate tokens separated by a logit margin of $< 10^{-4}$. Fig. \ref{fig:kv_cache} illustrates this scaling divergence across context lengths.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\columnwidth]{figures/kv_cache_scaling.pdf}
+\caption{Task 3 decoding throughput (tokens/sec) comparing KV-cached execution against uncached quadratic recomputation.}
+\label{fig:kv_cache}
+\end{figure}
 
 \subsection{Tiled Online-Softmax Attention Evaluation}
 Table \ref{tab:tiled_attn} benchmarks peak memory allocation and execution time between standard SDPA and our tiled implementation.
@@ -147,6 +173,7 @@ Table \ref{tab:tiled_attn} benchmarks peak memory allocation and execution time 
 \begin{table}[htbp]
 \caption{Task 4: Attention Mechanism Memory and Runtime Scaling}
 \begin{center}
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Seq Length ($N$)} & \textbf{SDPA Mem} & \textbf{Tiled Mem} & \textbf{Memory Saved} & \textbf{Fused Time} \\
@@ -158,6 +185,7 @@ Table \ref{tab:tiled_attn} benchmarks peak memory allocation and execution time 
 2048 & 424.19 MB & 24.23 MB & \textbf{94.3\%} & 3.60 ms \\
 \bottomrule
 \end{tabular}
+}
 \label{tab:tiled_attn}
 \end{center}
 \end{table}
@@ -170,6 +198,7 @@ Table \ref{tab:spec_results} reports empirical drafting statistics across lookah
 \begin{table}[htbp]
 \caption{Task 5: Speculative Decoding Performance Metrics}
 \begin{center}
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccc}
 \toprule
 \textbf{Lookahead ($K$)} & \textbf{Acceptance Rate} & \textbf{Target Speed} & \textbf{Spec Speed} & \textbf{Speedup} \\
@@ -179,11 +208,30 @@ $K = 3$ & 1.3\% & 11.59 t/s & 4.13 t/s & 0.36$\times$ (Slowdown) \\
 $K = 4$ & 1.0\% & 11.73 t/s & 3.39 t/s & 0.29$\times$ (Slowdown) \\
 \bottomrule
 \end{tabular}
+}
 \label{tab:spec_results}
 \end{center}
 \end{table}
 
-As anticipated by the course rubric, speculative decoding yielded a slowdown ($0.29\times\text{--}0.47\times$). This phenomenon stems from the clinical domain discrepancy: the off-the-shelf 0.5B draft model lacked supervised medical adaptation and failed to mirror the structured JSON syntax and domain-specific terminology of the fine-tuned 3B model, resulting in frequent draft rejections where the overhead of speculative drafting and rollback exceeded the verification benefit.
+As anticipated by the course rubric, speculative decoding yielded a slowdown ($0.29\times\text{--}0.47\times$). This phenomenon stems from the clinical domain discrepancy: the off-the-shelf 0.5B draft model lacked supervised medical adaptation and failed to mirror the structured JSON syntax and domain-specific terminology of the fine-tuned 3B model, resulting in frequent draft rejections where the overhead of speculative drafting and rollback exceeded the verification benefit (visualized in Fig. \ref{fig:spec_speedup}).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\columnwidth]{figures/speculative_speedup.pdf}
+\caption{Task 5 draft acceptance rate and generation speedup factor as a function of speculative lookahead horizon ($K$).}
+\label{fig:spec_speedup}
+\end{figure}
+
+\section{Integrated Web Application}
+Fulfilling Task 6 and Rubrics G1--G4, we deployed a standalone browser application (\texttt{src/app/app.py}) built in Streamlit. The application provides:
+\begin{enumerate}
+    \item \textbf{Complete Screening Workflow}: Users supply patient records and enter multiple dynamic inclusion and exclusion criteria.
+    \item \textbf{Live Transformer Inference}: Loads the fine-tuned Qwen2.5-3B model and LoRA adapter from Hugging Face Hub, executing token-by-token generation with choice of KV-cached or uncached decoding.
+    \item \textbf{Traceable Evidence Highlighting}: Cited sentence indices are dynamically tagged and highlighted in the patient note.
+    \item \textbf{Rule-Based Trial Outcome}: Aggregates criteria decisions into \texttt{PRELIMINARY ELIGIBLE}, \texttt{PRELIMINARY INELIGIBLE}, or \texttt{UNCERTAIN}.
+    \item \textbf{Usability and Export}: Includes a mandatory educational prototype disclaimer and provides 1-click persistent JSON report download with audit provenance.
+    \item \textbf{Benchmark Dashboard}: Exposes interactive exploration of Tasks 3, 4, and 5 benchmark data and qualitative failure mode inspection.
+\end{enumerate}
 
 \section{Failure Analysis}
 Qualitative examination of misclassifications identified eight distinct clinical failure modes:
@@ -200,6 +248,13 @@ Qualitative examination of misclassifications identified eight distinct clinical
 
 \section{Conclusion}
 We have implemented, evaluated, and deployed an end-to-end clinical screening system using Qwen2.5-3B-Instruct. Parameter-efficient fine-tuning via 4-bit QLoRA substantially improved classification accuracy (73.3\% held-out test) and evidence sentence localization (85.4\% F1). Our algorithmic implementations of KV-caching, tiled online-softmax attention, and speculative decoding validated theoretical memory and computational tradeoffs on commodity GPUs.
+
+\section*{Reproducibility and Artifact Access}
+\begin{itemize}
+    \item \textbf{Source Code Repository}: \url{https://github.com/noumaan-siddiqui/genai-assignment2}
+    \item \textbf{Model Weights / LoRA Adapter}: \url{https://huggingface.co/noumaan-siddiqui/trialgpt-qwen3b-lora}
+    \item \textbf{Split Manifest}: \texttt{data/split\_manifest.json} (37 train / 8 val / 8 test)
+\end{itemize}
 
 \section*{Appendix: AI Assistant Declaration}
 In accordance with course guidelines, Antigravity AI was utilized as a pair-programming assistant for script modularization, LaTeX drafting, and debugging Python subshells. All mathematical derivations, implementations, and benchmark interpretations were reviewed and verified.
